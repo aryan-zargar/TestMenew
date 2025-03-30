@@ -1,0 +1,59 @@
+import { useState } from 'react';
+import './App.css';
+import LogoCarousel from './components/LogoCarousel';
+import steakBg from "./assets/steakBackground.avif";
+import ramenBg from "./assets/ramenBackground.avif";
+import lobsterBg from "./assets/lobsterBackground.png";
+import SteakLogo from './assets/SteakHouseLogo.png'
+import ramenLogo from './assets/ramenLogo.png'
+import lobsterLogo from './assets/lobsterLogo.png'
+
+function App() {
+  const [activeIndex, setActiveIndex] = useState(1);
+  const foodcourtList = [
+    {
+      id: 2,
+      name: "Japan Ramen Lounge",
+      description: "تو این رستوران ما بهت یاد می‌دیم که چجوری با چاپ استیک نودل رو حرفه‌ای تر از چینی‌ها بخوری!",
+      backgroundPic: ramenBg,
+      Logo:ramenLogo
+    },
+    {
+      id: 1,
+      name: "Shean's Steak House",
+      description: "طعمی جذاب و فضایی دلنشین را در خانه استیک با ما تجربه کنید!",
+      backgroundPic: steakBg,
+      Logo:SteakLogo
+    },
+    {
+      id: 3,
+      name: "Jack's Sea Food",
+      description: "ما از دریا تا سر میز شما میزبانتان هستیم.",
+      backgroundPic: lobsterBg,
+      Logo:lobsterLogo
+    }
+  ];
+
+  return (
+    <>
+      <div style={{backgroundImage:`url(${foodcourtList[activeIndex].backgroundPic})`}}
+
+        className="bg-cover  bg-center h-[100dvh]  flex flex-col    "
+        >
+        <div className=' flex justify-center  rounded-3xl p-3' >
+          <img className='size-56' src={foodcourtList[activeIndex].Logo} />
+        </div>
+        <div className='mx-10 font-medium text-zinc-200 text-2xl bg-[#ffffff40] text-center rounded-3xl p-3'  dir='rtl' >
+          <p>{foodcourtList[activeIndex].description}</p>
+        </div>
+        <div className='flex h-full items-end justify-center'>
+          <div className="bg-opacity-50  rounded-lg   flex justify-center ">
+            <LogoCarousel activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default App;
