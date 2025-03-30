@@ -10,11 +10,10 @@ import lobsterBg from "./assets/lobsterBackground.png";
 import SteakLogo from "./assets/SteakHouseLogo.png";
 import ramenLogo from "./assets/ramenLogo.png";
 import lobsterLogo from "./assets/lobsterLogo.png";
-import burgerLogo from './assets/burgerlogo.png'
-import burgerBg from './assets/burgerBg.avif'
-import pizzaLogo from './assets/pizzaLogo.png'
-import pizzaBg from './assets/pizzaBg.jpg'
-
+import burgerLogo from "./assets/burgerlogo.png";
+import burgerBg from "./assets/burgerBg.avif";
+import pizzaLogo from "./assets/pizzaLogo.png";
+import pizzaBg from "./assets/pizzaBg.jpg";
 function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const sliderRef = useRef(null);
@@ -31,13 +30,13 @@ function App() {
     {
       id: 2,
       name: "Japan Ramen Lounge",
-      description: "تو این رستوران ما بهت یاد می‌دیم که چجوری با چاپ استیک نودل رو حرفه‌ای تر از چینی‌ها بخوری!",
+      description: "تو این رستوران ما بهت یاد می‌دیم که چجوری با چاپستیک نودل رو حرفه‌ای‌تر از چینی‌ها بخوری!",
       backgroundPic: ramenBg,
       Logo: ramenLogo,
     },
     {
       id: 3,
-      name: "Jack's Sea Food",
+      name: "Jack's Seafood",
       description: "ما از دریا تا سر میز شما میزبانتان هستیم.",
       backgroundPic: lobsterBg,
       Logo: lobsterLogo,
@@ -45,26 +44,18 @@ function App() {
     {
       id: 4,
       name: "Burger King",
-      description: "مزه ها را با ما تجربه کنید",
+      description: "مزه‌ها را با ما تجربه کنید.",
       backgroundPic: burgerBg,
       Logo: burgerLogo,
     },
     {
       id: 5,
-      name: "pizza hut",
-      description: "ما پیتزا را از قلب ایتالیا برای شما می آوریم",
+      name: "Pizza Hut",
+      description: "ما پیتزا را از قلب ایتالیا برای شما می‌آوریم.",
       backgroundPic: pizzaBg,
       Logo: pizzaLogo,
     },
   ];
-
-  // Function to sync main carousel and logo carousel
-  const handleSlideChange = (index) => {
-    setActiveIndex(index);
-    if (logoSliderRef.current) {
-      logoSliderRef.current.slickGoTo(index);
-    }
-  };
 
   useEffect(() => {
     if (sliderRef.current && logoSliderRef.current) {
@@ -83,34 +74,33 @@ function App() {
     arrows: false,
     centerMode: true,
     centerPadding: "0px",
-    afterChange: handleSlideChange,
+    afterChange: setActiveIndex,
   };
 
   return (
     <div
-      className="h-[100dvh] w-full transition-all duration-500 relative"
+      className="h-[100dvh] w-full transition-all duration-500 relative overflow-hidden"
       style={{
-        backgroundImage: `url("${foodcourtList[activeIndex].backgroundPic}")`,
+        backgroundImage: `url(${foodcourtList[activeIndex].backgroundPic})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
-        overflow:"hidden"
       }}
     >
-      {/* Main Foreground Carousel */}
       <Slider {...settings} ref={sliderRef} className="h-full flex items-center">
-        {foodcourtList.map((item, index) => (
+        {foodcourtList.map((item) => (
           <div key={item.id} className="flex flex-col items-center justify-center h-[100dvh]">
             <div className="flex justify-center rounded-3xl p-3">
               <img className="size-56" src={item.Logo} alt={item.name} />
             </div>
-            <div className="mx-10 font-medium text-zinc-200 text-2xl bg-[#ffffff40] text-center rounded-3xl p-3" dir="rtl">
+            <div
+              className="mx-10 font-medium text-zinc-200 text-2xl bg-[#ffffff40] text-center rounded-3xl p-3"
+              dir="rtl"
+            >
               <p>{item.description}</p>
             </div>
           </div>
         ))}
       </Slider>
-
-      {/* 🔥 Centered Logo Carousel */}
       <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 w-full flex justify-center">
         <LogoCarousel activeIndex={activeIndex} setActiveIndex={setActiveIndex} sliderRef={logoSliderRef} />
       </div>
